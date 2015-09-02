@@ -43,7 +43,7 @@ header > .content > h1 {
     text-align: center;
     line-height: 3.5rem;
 }
-.question h2 {
+h2.question {
     font-family: 'Cinzel Decorative', cursive;
     font-size: 1.7rem;
     font-weight: 700;
@@ -57,16 +57,16 @@ header > .content > h1 {
     margin: 0 auto;
     padding: 20px 10px 20px 10px;
 }
-.main > .graphic {
+.graphic {
     width: 50%;
     display: inline-block;
     float: right;
     text-align: center;
 }
-.main > .graphic > img {
+.graphic > img {
     width: 250px;
 }
-.main > .answers {
+.answers {
     width: 50%;
     display: inline-block;
 }
@@ -74,7 +74,7 @@ header > .content > h1 {
     list-style: none;
     padding-top: 5px;
 }
-.answers > ul > li {
+.answers .choice {
     font-size: 1.5rem;
     font-weight: 700;
     width: 90%;
@@ -85,8 +85,12 @@ header > .content > h1 {
     border: solid #E8430C 2px;
     border-radius: .4rem;
 }
-.answers > ul > li:hover {
+.answers .choice:hover {
     background-color: #E8430C;
+}
+.selected {
+    background-color: #7D0000;
+    color: #ffffff;
 }
 button {
     font-size: 1.25rem;
