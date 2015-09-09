@@ -52,6 +52,15 @@ h2.question {
     width: 100%;
     text-align: center;
 }
+ h3 {
+    font-family: 'PT Serif', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
 .content {
     width: 600px;
     margin: 0 auto;
@@ -88,9 +97,8 @@ h2.question {
 .answers .choice:hover {
     background-color: #E8430C;
 }
-.selected {
-    background-color: #7D0000;
-    color: #ffffff;
+.answers .selected {
+    background-color: #E8430C;
 }
 button {
     font-size: 1.25rem;
@@ -131,7 +139,6 @@ footer a:hover {
     z-index: 1000;
     margin: 0 auto;
     text-align: center;
-    display: none;
 }
 .overlay h2 {
     font-family: 'Cinzel Decorative', cursive;
@@ -150,4 +157,31 @@ footer a:hover {
      text-align: center;
      margin: 10px 10px 30px 10px;
  }
+ .quiz-end {
+    background-color: #000000;
+    border-radius: 1rem;
+    border: solid #E8430C 2px;
+    width: 600px;
+    z-index: 1001;
+    margin: 0 auto;
+    text-align: center;
+}
+.quiz-end h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: .09rem;
+    width: 100%;
+    text-align: center;
+}
+.quiz-end p {
+     font-family: 'PT Serif', serif;
+     font-size: 1.5rem;
+     font-weight: 400;
+     color: #ffffff;
+     text-align: center;
+     margin: 10px 10px 30px 10px;
+ }
+
 

@@ -3,34 +3,23 @@
  */
 $(document).ready(function() {
 
-
-    //user selects answer
-    //user submits answer
-    //show overlay
-    //hide main content
-    //compare answer
-    //if correct show Correct and description
-    //if incorrect show Incorrect and description
-    //user clicks continue button
-    //load next question
-
-
-
-
-
-    // Key points
     //initialize variables
-    var correct, useranswer, currentq;
+    var correct, useranswer, currentq, ofquestion, scoreHTML;
 
 
     //get dom objects
     var $question = $('h2.question');
     var $answers = $('.answers ul');
     var $submit = $('.submit-guess');
-    var $continue = $('.continue');
-    var $results = $('.results');
-    var $description = $('.description');
+    var $cont = $('.overlay .continue');
+    var $results = $('.overlay .results');
+    var $description = $('.overlay .description');
     var $choice = $('.answers > ul > li.choice');
+    var $overlay = $('.overlay');
+    var $main = $('.main');
+    var $end = $('.quiz-end');
+    var $playagain = $('.play-again');
+    var $userscore = $('.user-score');
 
     //constructor template object
     function Question(question, answers, correct, desc) {
@@ -51,34 +40,113 @@ $(document).ready(function() {
     var list = [question1, question2, question3, question4, question5];
     //get question out of list
     var count = -1;
-    function getQuestion(count) {
+    function getQuestion() {
         count++;
         currentq = list[count];
         console.log('currentq:' + currentq);
         console.log('count:' + count);
+        displayQuestion();
     }
     
-    
-  
     var newHTML;
     function displayQuestion() {
+        newHTML = "";
         $question.text(currentq.question);
         $.each(currentq.answers, function(index, value) {
-            newHTML += '<li>'+value+'</li>';
+            newHTML += '<li class="choice">'+value+'</li>';
         });
         $answers.html(newHTML);
-        console.log(newHTML);
     }
 
     //event handlers
     //new game function
     function newGame() {
+        //reset variables
+        userscore = 0;
+        //show main question area
+        $main.fadeIn(1000);
         //hide overlay
+        $overlay.hide();
+        //hide ending
+        $end.hide();
         //load question1
-
         getQuestion();
         console.log(list);
     }
+
+    //user selects answer
+    $('.answers ul').on( "click", ".choice", function(event) {
+        event.preventDefault();
+        useranswer = $(this).text();
+        $('.choice').removeClass('selected');
+        $(this).addClass('selected');
+        console.log("useranswer:" + useranswer);
+    });
+
+    //user submits answer
+    $submit.click(function(event){
+        event.preventDefault();
+        showOverlay();
+        answerCheck();
+    });
+
+    //show overlay
+    function showOverlay() {
+        $overlay.fadeIn(1000);
+        //hide main content
+        $main.hide();
+    }
+    
+    //compare answer
+    function answerCheck(){
+        if (useranswer === currentq.correct) {
+            //if correct show Correct and description
+            userscore++;
+            $results.text('Correct!');
+            $description.text(currentq.desc);
+        } else {
+            //if incorrect show Incorrect and description
+            $results.text('Incorrect!');
+            $description.text(currentq.desc);
+        }
+        userScore();
+    }
+    //user clicks continue button
+    $cont.click(function(event) {
+        event.preventDefault();
+        //load next question
+        $overlay.hide();
+        $main.fadeIn(1000);
+        if (count <= 3) {
+            getQuestion();
+        } else {
+            showEnd();
+        }
+            
+    });
+    //track users score
+    var userscore = 0;
+
+    function userScore() {
+        ofquestion = count + 1;
+        scoreHTML = userscore + " of " + ofquestion + " questions correct";
+        $userscore.text(scoreHTML);
+    }
+
+    //show quiz ending
+    function showEnd() {
+        count = -1;
+        $overlay.fadeOut(1000);
+        $main.hide();
+        $end.fadeIn(1000);
+    }
+    
+    //play again
+    $playagain.click(function(event) {
+        event.preventDefault();
+        //start a new game
+        newGame();     
+    });
 
     //page load
     newGame();
